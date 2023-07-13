@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "digi-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Alliera/digi-ios",
+      "state" : {
+        "branch" : "main",
+        "revision" : "b9a676ee524fff8083e650444be295d9a1e2d2e4"
+      }
+    }
+  ],
+  "version" : 2
+}

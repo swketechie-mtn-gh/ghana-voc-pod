@@ -1,0 +1,66 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <style>
+        #VocSignalApp .SandSIV_Feedback_Modal {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            height: auto;
+            width: auto;
+            transform: none;
+        }
+
+      
+        .supportMessage {
+            width: 100%;
+            margin-top: 100px;
+            text-align: center;
+        }
+    </style>
+    <!-- &full_screen=true -->
+	<script src="%@"></script>
+    <script type="text/javascript">
+            window.VocSignal_ListenEvent('PopupClosedCallback', () => {
+                try {
+                    webkit.messageHandlers.closeCallbackHandler.postMessage("window_close");
+                } catch(err) {
+                    console.log('The native context does not exist yet');
+                }
+            })
+
+            window.VocSignal_ListenEvent('FinishCallback', () => {
+                try {
+                    webkit.messageHandlers.closeCallbackHandler.postMessage("window_close");
+                } catch(err) {
+                    console.log('The native context does not exist yet');
+                }
+            })
+
+            let timerId = null;
+            const callbackName = 'PopupShownCallback';
+            window.VocSignal_ListenEvent(callbackName, () => {
+                let timerId = setInterval(() => {
+                    let elements = document.getElementsByClassName('SandSIV_Feedback_Modal');
+
+                    if(elements.length) {
+                        clearInterval(timerId);
+                        setTimeout(() => {
+                            console.log('------>>>>>>>---показываем---------')
+                            try {
+                                webkit.messageHandlers.shownCallbackHandler.postMessage("window_shown");
+                            } catch(err) {
+                                console.log('The native context does not exist yet');
+                            }
+                        }, 0)
+                    }
+                }, 10)
+                alert(callbackName);
+            })
+    </script>
+</head>
+</html>
