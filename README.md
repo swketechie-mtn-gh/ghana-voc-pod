@@ -1,12 +1,12 @@
 To use the `DigiModule` library for iOS, add `DigiModule` repo:  
 ```
-pod repo add DigiModule https://github.com/Alliera/digi-ios
+pod repo add DigiModule https://github.com/swketechie-mtn-gh/ghana-voc-pod
 ```
 
 
 Add dependency `pod 'DigiModule'` to the `Podfile` file:
 ```
-source 'https://github.com/Alliera/digi-ios.git'
+source 'https://github.com/swketechie-mtn-gh/ghana-voc-pod.git'
 
 target '<Project_target>' do
   use_frameworks!
