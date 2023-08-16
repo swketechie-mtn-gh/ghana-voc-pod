@@ -11,7 +11,7 @@ import UIKit
 
 typealias EmptyCompletion = () -> Void
 typealias ServerCompletion<T, U> = (T, U) -> Void
-typealias Completion<T> = (T) -> Void
+public typealias Completion<T> = (T) -> Void
 
 func globalAsync(completion: @escaping () -> Void) {
     DispatchQueue.global().async {

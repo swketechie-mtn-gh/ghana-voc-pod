@@ -14,11 +14,15 @@ public struct Margins {
     let left: CGFloat
     let bottom: CGFloat
     
-    public init(top: CGFloat = 10, right: CGFloat = 10, left: CGFloat = 10, bottom: CGFloat = 10) {
+    let cornerRadius: CGFloat
+    
+    public init(top: CGFloat = 10, right: CGFloat = 10, left: CGFloat = 10, bottom: CGFloat = 10, cornerRadius: CGFloat = 8) {
         self.top = top
         self.right = right
         self.left = left
         self.bottom = bottom
+        
+        self.cornerRadius = cornerRadius
     }
 }
 
@@ -27,6 +31,7 @@ final class WebViewController: BaseViewController {
     private var webView = WKWebView(frame: .zero)
     private let closeCallbackName = "closeCallbackHandler"
     private let shownCallbackName = "shownCallbackHandler"
+    private let initialResponseCallbackName = "initialResponseCallbackHandler"
     private lazy var activityIndicator: UIActivityIndicatorView = {
         var indicator = UIActivityIndicatorView(style: .gray)
 
@@ -60,6 +65,7 @@ final class WebViewController: BaseViewController {
         let contentController = WKUserContentController()
         contentController.add(self, name: self.closeCallbackName)
         contentController.add(self, name: self.shownCallbackName)
+        contentController.add(self, name: self.initialResponseCallbackName)
         
         let configuration = WKWebViewConfiguration()
         configuration.userContentController = contentController
@@ -74,6 +80,9 @@ final class WebViewController: BaseViewController {
         self.webView.pinBottom(to: view.layoutMarginsGuide.bottomAnchor, offset: -model.margins.bottom)
         self.webView.pinLeft(to: view.leadingAnchor, offset: model.margins.left)
         self.webView.pinRight(to: view.trailingAnchor, offset: -model.margins.right)
+        if #available(iOS 16.4, *) {
+            self.webView.isInspectable = true
+        }
         
         #if SWIFT_PACKAGE
         self.webView.loadHTMLString(self.modifyHTMLFile(), baseURL: Bundle.module.bundleURL)
@@ -90,7 +99,7 @@ final class WebViewController: BaseViewController {
         super.viewDidLayoutSubviews()
         
         self.webView.layer.masksToBounds = true
-        self.webView.layer.cornerRadius = 8
+        self.webView.layer.cornerRadius = model.margins.cornerRadius
     }
 }
 
@@ -136,6 +145,8 @@ private extension WebViewController {
         let destinationUrl = documentsUrl.appendingPathComponent(scriptName)
         let jsUrl = destinationUrl.absoluteString + pathString
         
+        Log("Script path: \(jsUrl)")
+        
         return emailTemplate.replacingOccurrences(of: "%@", with: jsUrl)
     }
 }
@@ -147,7 +158,7 @@ extension WebViewController: WKUIDelegate, WKNavigationDelegate, WKScriptMessage
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-
+        Log("DidFinish WebView: \(webView.debugDescription)")
     }
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
@@ -159,6 +170,24 @@ extension WebViewController: WKUIDelegate, WKNavigationDelegate, WKScriptMessage
             UIView.animate(withDuration: 0.05, delay: 0.0, options: .curveEaseInOut, animations: {
                 self.webView.layer.opacity = 1
             }, completion:nil)
+        } else if message.name == self.initialResponseCallbackName {
+            Log(message.body)
+            
+            if let initialResponseDict = message.body as? Dictionary<String, Any>,
+               let status = initialResponseDict["status"] as? Int,
+               status != 200,
+               let response = initialResponseDict["response"] as? Dictionary<String, Any>,
+               let error = response["error"] as? String {
+                let initialResponse = InitialError(status: status,
+                                                   error: error)
+
+                self.dismiss(animated: true) {
+                    self.model.completion?(.failure(initialResponse))
+                }
+                
+            } else {
+                model.completion?(.success(()))
+            }
         }
     }
     

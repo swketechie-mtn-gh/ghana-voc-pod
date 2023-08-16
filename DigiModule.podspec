@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name         = "DigiModule"
-  spec.version      = "1.0.0"
+  spec.version      = "1.0.1"
   spec.summary      = "DigiModule SDK makes it easy to integrate Alliera functionality into your apps."
 
   spec.description  = <<-DESC
@@ -11,7 +11,7 @@ Pod::Spec.new do |spec|
   spec.license      = { :type => 'MIT', :file => 'LICENSE' }
   spec.author       = "Alliera"
 
-  spec.platform     = :ios, "12.0"
+  spec.platform     = :ios, "11.0"
 
   spec.source       = { :git => "https://github.com/Alliera/digi-ios.git", :tag => "#{spec.version}" }
   spec.source_files  = "Sources/DigiModule/**/*"
