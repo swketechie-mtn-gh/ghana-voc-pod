@@ -31,9 +31,10 @@ public class DigiModule {
                      language: String,
                      params: [String: Any]? = nil,
                      margins: Margins? = Margins(),
-                     presentationController: UIViewController) {
+                     presentationController: UIViewController,
+                     complition: Completion<Result<Void, InitialError>>? = nil) {
         
-        let model = WebViewModel(surveyId: surveyId, language: language, params: params, margins: margins!)
+        let model = WebViewModel(surveyId: surveyId, language: language, params: params, margins: margins!, completion: complition)
         let viewController = WebViewController.init(model: model)
         viewController.modalPresentationStyle = .overFullScreen
         presentationController.present(viewController, animated: false)
