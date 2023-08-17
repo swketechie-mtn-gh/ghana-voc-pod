@@ -7,19 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C4AEFCF52A77B3550069BB0C /* DigiModule in Frameworks */ = {isa = PBXBuildFile; productRef = C4AEFCF42A77B3550069BB0C /* DigiModule */; };
 		C4E887B928E21835002E684E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E887B828E21835002E684E /* AppDelegate.swift */; };
-		C4E887BB28E21835002E684E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E887BA28E21835002E684E /* SceneDelegate.swift */; };
 		C4E887BD28E21835002E684E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E887BC28E21835002E684E /* ViewController.swift */; };
 		C4E887C028E21835002E684E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4E887BE28E21835002E684E /* Main.storyboard */; };
 		C4E887C228E21835002E684E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4E887C128E21835002E684E /* Assets.xcassets */; };
 		C4E887C528E21835002E684E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4E887C328E21835002E684E /* LaunchScreen.storyboard */; };
-		C4E887DA28E2308B002E684E /* DigiModule in Frameworks */ = {isa = PBXBuildFile; productRef = C4E887D928E2308B002E684E /* DigiModule */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C4AEFCF32A77B32A0069BB0C /* DigiModule */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DigiModule; path = ..; sourceTree = "<group>"; };
 		C4E887B528E21835002E684E /* DigiModuleExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DigiModuleExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4E887B828E21835002E684E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C4E887BA28E21835002E684E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		C4E887BC28E21835002E684E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C4E887BF28E21835002E684E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C4E887C128E21835002E684E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -32,18 +31,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C4E887DA28E2308B002E684E /* DigiModule in Frameworks */,
+				C4AEFCF52A77B3550069BB0C /* DigiModule in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C4AEFCF22A77B32A0069BB0C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C4AEFCF32A77B32A0069BB0C /* DigiModule */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		C4E887AC28E21835002E684E = {
 			isa = PBXGroup;
 			children = (
 				C4E887B728E21835002E684E /* DigiModuleExample */,
 				C4E887B628E21835002E684E /* Products */,
+				C4AEFCF22A77B32A0069BB0C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -59,7 +67,6 @@
 			isa = PBXGroup;
 			children = (
 				C4E887B828E21835002E684E /* AppDelegate.swift */,
-				C4E887BA28E21835002E684E /* SceneDelegate.swift */,
 				C4E887BC28E21835002E684E /* ViewController.swift */,
 				C4E887BE28E21835002E684E /* Main.storyboard */,
 				C4E887C128E21835002E684E /* Assets.xcassets */,
@@ -86,7 +93,7 @@
 			);
 			name = DigiModuleExample;
 			packageProductDependencies = (
-				C4E887D928E2308B002E684E /* DigiModule */,
+				C4AEFCF42A77B3550069BB0C /* DigiModule */,
 			);
 			productName = DigiModuleExample;
 			productReference = C4E887B528E21835002E684E /* DigiModuleExample.app */;
@@ -117,7 +124,6 @@
 			);
 			mainGroup = C4E887AC28E21835002E684E;
 			packageReferences = (
-				C4E887D828E2308B002E684E /* XCRemoteSwiftPackageReference "digi-ios" */,
 			);
 			productRefGroup = C4E887B628E21835002E684E /* Products */;
 			projectDirPath = "";
@@ -148,7 +154,6 @@
 			files = (
 				C4E887BD28E21835002E684E /* ViewController.swift in Sources */,
 				C4E887B928E21835002E684E /* AppDelegate.swift in Sources */,
-				C4E887BB28E21835002E684E /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,7 +300,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = L6774RB7MU;
+				DEVELOPMENT_TEAM = TLP4C5J57E;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DigiModuleExample/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -323,7 +328,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = L6774RB7MU;
+				DEVELOPMENT_TEAM = TLP4C5J57E;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DigiModuleExample/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -367,21 +372,9 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCRemoteSwiftPackageReference section */
-		C4E887D828E2308B002E684E /* XCRemoteSwiftPackageReference "digi-ios" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Alliera/digi-ios";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
 /* Begin XCSwiftPackageProductDependency section */
-		C4E887D928E2308B002E684E /* DigiModule */ = {
+		C4AEFCF42A77B3550069BB0C /* DigiModule */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = C4E887D828E2308B002E684E /* XCRemoteSwiftPackageReference "digi-ios" */;
 			productName = DigiModule;
 		};
 /* End XCSwiftPackageProductDependency section */

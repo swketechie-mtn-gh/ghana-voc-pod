@@ -24,43 +24,55 @@
     </style>
     <!-- &full_screen=true -->
 	<script src="%@"></script>
-    <script type="text/javascript">
-            window.VocSignal_ListenEvent('PopupClosedCallback', () => {
-                try {
-                    webkit.messageHandlers.closeCallbackHandler.postMessage("window_close");
-                } catch(err) {
-                    console.log('The native context does not exist yet');
-                }
-            })
-
-            window.VocSignal_ListenEvent('FinishCallback', () => {
-                try {
-                    webkit.messageHandlers.closeCallbackHandler.postMessage("window_close");
-                } catch(err) {
-                    console.log('The native context does not exist yet');
-                }
-            })
-
-            let timerId = null;
-            const callbackName = 'PopupShownCallback';
-            window.VocSignal_ListenEvent(callbackName, () => {
-                let timerId = setInterval(() => {
-                    let elements = document.getElementsByClassName('SandSIV_Feedback_Modal');
-
-                    if(elements.length) {
-                        clearInterval(timerId);
-                        setTimeout(() => {
-                            console.log('------>>>>>>>---показываем---------')
-                            try {
-                                webkit.messageHandlers.shownCallbackHandler.postMessage("window_shown");
-                            } catch(err) {
-                                console.log('The native context does not exist yet');
-                            }
-                        }, 0)
-                    }
-                }, 10)
-                alert(callbackName);
-            })
-    </script>
 </head>
+<script type="text/javascript">
+        window.VocSignal_ListenEvent('PopupClosedCallback', () => {
+            try {
+                webkit.messageHandlers.closeCallbackHandler.postMessage("window_close");
+            } catch(err) {
+                console.log('The native context does not exist yet');
+            }
+        })
+
+        window.VocSignal_ListenEvent('FinishCallback', () => {
+            try {
+                webkit.messageHandlers.closeCallbackHandler.postMessage("window_close");
+            } catch(err) {
+                console.log('The native context does not exist yet');
+            }
+        });
+    
+        window.VocSignal_ListenEvent('InitialResponseCallback', (data) => {
+            if(data.status === 200) {
+                window.VocSignal_SendEvent('PopupSurvey')
+            }
+            
+            try {
+                webkit.messageHandlers.initialResponseCallbackHandler.postMessage(data);
+            } catch(err) {
+                console.log('The native context does not exist yet');
+            }
+        });
+
+        let timerId = null;
+        const callbackName = 'PopupShownCallback';
+        window.VocSignal_ListenEvent(callbackName, () => {
+            let timerId = setInterval(() => {
+                let elements = document.getElementsByClassName('SandSIV_Feedback_Modal');
+
+                if(elements.length) {
+                    clearInterval(timerId);
+                    setTimeout(() => {
+                        console.log('------>>>>>>>---показываем---------')
+                        try {
+                            webkit.messageHandlers.shownCallbackHandler.postMessage("window_shown");
+                        } catch(err) {
+                            console.log('The native context does not exist yet');
+                        }
+                    }, 0)
+                }
+            }, 10)
+            alert(callbackName);
+        })
+</script>
 </html>

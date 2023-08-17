@@ -1,12 +1,12 @@
 To use the `DigiModule` library for iOS, add `DigiModule` repo:  
 ```
-pod repo add DigiModule https://github.com/swketechie-mtn-gh/ghana-voc-pod
+pod repo add DigiModule https://github.com/Alliera/digi-ios
 ```
 
 
 Add dependency `pod 'DigiModule'` to the `Podfile` file:
 ```
-source 'https://github.com/swketechie-mtn-gh/ghana-voc-pod.git'
+source 'https://github.com/Alliera/digi-ios.git'
 
 target '<Project_target>' do
   use_frameworks!
@@ -51,8 +51,10 @@ class ViewController: UIViewController {
         DigiModule.shared.show(surveyId: 4536,
                                language: "en",
                                params: ["param1": 1, "param2": "two", "param3": true],
-                               margins: Margins(top: 10, right: 10, left: 10, bottom: 10),
-                               presentationController: self)
+                               margins: Margins(top: 10, right: 10, left: 10, bottom: 10, cornerRadius: 8),
+                               presentationController: self) { responce in
+            // Handle Questionnaire window error
+        }
     }
 }
 ```
@@ -61,8 +63,10 @@ class ViewController: UIViewController {
 
 `params` - optional (additional params for questionnaire, for example some metadata etc)
 
-`margins` - optional. Margins for the questionnaire window. Default margins `top: CGFloat = 10, right: CGFloat = 10, left: CGFloat = 10, bottom: CGFloat = 10`
+`margins` - optional. Margins for the questionnaire window. Default margins `top: CGFloat = 10, right: CGFloat = 10, left: CGFloat = 10, bottom: CGFloat = 10, cornerRadius: CGFloat = 8`
+
+`margins.cornerRadius` - Questionnaire window corner radius constant.   
 
 `presentationController` - presentationController to start DigiModule view
 
-
+`completion` - Questionnaire window callback. `Result` if failure, completion return `InitialError` object `status: String, error: String`
